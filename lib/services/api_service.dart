@@ -1,5 +1,5 @@
 class ApiService {
-  static const String baseUrl = "http://192.168.81.181/api/api_modify.php?what=";
+  static const String baseUrl = "http://192.168.0.103/api/api_modify.php?what=";
   // static const String baseUrl =
   //     "http://192.168.51.237/api/api_modify.php?what=";
   // static const String baseUrl =
@@ -38,4 +38,5 @@ class ApiService {
 
   // Student Applications links
   static const String getAppliedCompanies = "${baseUrl}getappliedcompanies";
+  static const String getAppliedStudents = "${baseUrl}getappliedstudents"; // adding hid after calling the method (getPendingShortList)
 }
