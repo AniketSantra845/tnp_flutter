@@ -26,7 +26,7 @@ class StudentApplicationDbToUi {
   factory StudentApplicationDbToUi.fromJson(Map<String, dynamic> json) {
     return StudentApplicationDbToUi(
       id: json['id'] != null ? int.parse(json['id']) : 0,
-      hiring_id: json['hid'] != null ? int.parse(json['id']) : 0,
+      hiring_id: json['hid'] != null ? int.parse(json['hid']) : 0,
       cif: json['cif'] ?? 0,
       name: json['name'] ?? '',
       about: json['about'] ?? '',

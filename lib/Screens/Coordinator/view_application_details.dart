@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:placements/Controllers/student_application_controller.dart';
 import 'package:placements/Models/Student_Applications/db_to_ui.dart';
 
+import 'package:placements/Screens/Coordinator/pending_short_list.dart';
 import '../../Shared Docs/Common Widgets/circle_icon.dart';
 import '../../Shared Docs/Common Widgets/error_dialog.dart';
 
@@ -101,6 +102,23 @@ class _ViewApplicationDetailsScreenState
     }
   }
 
+  Future<void> navigateToPage(int? hiring_id, String? company) async {
+    final route = MaterialPageRoute(
+      builder: (context) => PendingListView(company: company!, hid: hiring_id!),
+    );
+
+    // Unfocus the search text field before navigating
+    FocusScope.of(context).unfocus();
+
+    // Wait for the detail page to be popped
+    await Navigator.push(context, route);
+
+    setState(() {
+      _isLoading = true;
+    });
+    fetchStudentApplications();
+  }
+
   Container _studentAppListItem(
       StudentApplicationDbToUi stdapp, BuildContext context, int stdappId) {
     return Container(
@@ -116,7 +134,7 @@ class _ViewApplicationDetailsScreenState
       ),
       margin: const EdgeInsets.all(10.0),
       padding: EdgeInsets.symmetric(
-        vertical: getProportionateScreenHeight(5),
+        vertical: getProportionateScreenHeight(10),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -161,6 +179,19 @@ class _ViewApplicationDetailsScreenState
                   color: const Color.fromARGB(255, 19, 28, 66),
                 ),
               ),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      color: kSecondaryTextColor,
+                    ),
+                    onPressed: () {
+                      navigateToPage(stdapp.hiring_id!, stdapp.name!);
+                    },
+                  ),
+                ],
+              )
             ],
           ),
         ],
